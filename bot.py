@@ -252,7 +252,7 @@ async def get_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     # You'll need to get the 'file_id' of the sticker you want to send.
     # To get a sticker's file_id, you can send the sticker to a bot like @RawDataBot.
     # Then, you can uncomment the line below and replace 'YOUR_STICKER_FILE_ID'
-    # await query.message.reply_sticker(sticker='YOUR_STICKER_FILE_ID')
+    await query.message.reply_sticker(sticker='AAMCAgADGQEAAT3t2WkaLPYrLJnPBXMIxUX1uycAAQVHxwACVUMAAmWD2Usty3VjgRC86gEAB20AAzYE')
 
 
     # --- Proceed to Logo Selection ---
@@ -367,7 +367,10 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
                 caption=get_text('advertisement', lang),
                 reply_markup=ad_markup,
                 parse_mode='Markdown'
+
             )
+            await query.message.reply_sticker(
+                sticker='AAMCAgADGQEAAT3t42kaLfCQ8MKOrvVLZjnAh7kgu9q9AAJtRQACbvHIS6xfsLE2sfA9AQAHbQADNgQ')
     except FileNotFoundError:
         logger.error(f"Advertisement image not found: {ad_image_path}")
         # If the ad image is missing, just send the text.
