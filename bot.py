@@ -252,7 +252,7 @@ async def get_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     # You'll need to get the 'file_id' of the sticker you want to send.
     # To get a sticker's file_id, you can send the sticker to a bot like @RawDataBot.
     # Then, you can uncomment the line below and replace 'YOUR_STICKER_FILE_ID'
-    
+
 
 
     # --- Proceed to Logo Selection ---
