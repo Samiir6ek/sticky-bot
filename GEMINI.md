@@ -1,0 +1,85 @@
+# Gemini's Notes for Samir's Sticker Bot
+
+This file will track the development process, decisions made, and the overall plan for building the Telegram bot for the "sticky_online_store".
+
+## Project Goals
+
+- Create a Telegram bot to promote a custom sticker business.
+- Offer a free sticker to users who subscribe to a Telegram channel.
+- Register users to prevent abuse of the free offer.
+- Collect user orders for the free sticker.
+- Notify the admin (Samir) of new orders.
+- Advertise the main sticker business.
+
+## Bot Flow & Features
+
+1.  **Start & Language Selection:**
+    - User starts the bot with `/start`.
+    - Bot replies with a welcome message and asks to select a language (ENG/UZB/RUS) via inline buttons.
+    - The chosen language will be used for all subsequent communication with that user.
+
+2.  **Channel Subscription:**
+    - Bot asks the user to subscribe to the `@sticky_online_store` channel.
+    - A button "✅ I have subscribed" is provided.
+    - The bot will verify the user's membership in the channel. If not a member, it will prompt them again.
+
+3.  **User Registration:**
+    - Once subscription is confirmed, the registration process begins.
+    - The bot checks if the user (by `user_id`) is already in the database. If so, it informs them they've already registered.
+    - **Collect Nickname:** Bot asks for the user's unique school nickname.
+    - **Collect Stage:** Bot asks for their stage (Intensive/Core) with buttons.
+    - **Collect Tribe:** Based on the stage, the bot presents the corresponding tribe options (Ayiq, Jayron, etc.) with buttons.
+
+4.  **Database:**
+    - An SQLite database will be used.
+    - A `users` table will store:
+        - `user_id` (Primary Key)
+        - `telegram_username`
+        - `language`
+        - `nickname`
+        - `stage`
+        - `tribe`
+        - `chosen_logo`
+        - `registration_timestamp`
+
+5.  **Free Sticker Order:**
+    - After registration, the user can choose the logo for their free sticker.
+    - **Choose Stage for Logo:** Bot asks which stage's logos they want to see (Intensive/Core).
+    - **Choose Tribe for Logo:** Bot shows the relevant tribe logos as buttons.
+    - Upon selection, the bot sends a picture of the chosen tribe's logo.
+    - The caption will confirm the order and provide a pickup date (placeholder).
+    - The `chosen_logo` is saved to the database.
+
+6.  **Admin Notification:**
+    - A formatted message with all the user's details and their order is sent to the Admin ID (`1096327366`).
+
+7.  **Advertisement:**
+    - After the order confirmation, the bot sends a final message.
+    - This message will be an advertisement for the paid sticker service, including the special offer for nickname stickers.
+    - It will be sent with a sample image and a button linking to Samir's personal Telegram account (`t.me/JUST_Samir`).
+
+## Technical Details
+
+- **Language:** Python
+- **Library:** `python-telegram-bot`
+- **Database:** SQLite3
+- **Key Feature:** `ConversationHandler` to manage the multi-step interaction flow.
+- **File Structure:**
+    - `bot.py`: Main application logic.
+    - `database.py`: Database setup and functions.
+    - `locales.py`: All bot text in ENG, UZB, RUS.
+    - `GEMINI.md`: This file.
+    - `README.md`: Instructions for setup and running the bot.
+    - `requirements.txt`: Project dependencies.
+    - `images/`: Directory for tribe logos and ad images.
+
+## Development Plan
+
+- **Step 1: Setup Project Structure:** Create all the necessary files and directories.
+- **Step 2: Database:** Implement `database.py`.
+- **Step 3: Locales:** Implement `locales.py` with all the text.
+- **Step 4: Bot Core:** Set up the main `bot.py`, including constants and the `ConversationHandler` skeleton.
+- **Step 5: Implement Conversation Flow:** Build out each step of the conversation from language selection to the final advertisement.
+- **Step 6: Placeholders:** Add comments for sticker and image placeholders.
+- **Step 7: Documentation:** Write the `README.md` file.
+- **Step 8: Final Review:** Test the entire flow and ensure all requirements are met.
