@@ -391,11 +391,37 @@ async def fallback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     return ConversationHandler.END
 
 
+from threading import Thread
+from flask import Flask
+
+# --- Webserver Setup for Render ---
+# Explanation for Samir:
+# This part runs a simple web server.
+# Render's free "Web Service" needs an application to be listening on a port.
+# This code satisfies that requirement to keep our bot alive 24/7.
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "Bot is running!"
+
+def run_web_server():
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0', port=port)
+
+
 # --- Main Application Setup ---
 def main() -> None:
     """
     This is the main function that runs the bot.
     """
+    # Explanation for Samir:
+    # We start the web server in a separate thread.
+    # The `daemon=True` part means the thread will automatically shut down when the main bot program stops.
+    web_thread = Thread(target=run_web_server)
+    web_thread.daemon = True
+    web_thread.start()
+
     # Explanation for Samir:
     # First, we make sure the database table is created and ready.
     logger.info("Setting up database...")
