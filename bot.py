@@ -6,6 +6,7 @@
 import logging
 import os
 import httpx
+import time
 from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 
@@ -38,6 +39,14 @@ ADMIN_ID = 1096327366
 GROUP_CHAT_ID = -1003141015653
 CHANNEL_USERNAME = "@sticky_online_store"  # Make sure to include the '@'
 API_BASE_URL = "https://platform.21-school.ru/services/21-school/api/v1"
+AUTH_URL = "https://auth.21-school.ru/auth/realms/EduPowerKeycloak/protocol/openid-connect/token"
+CLIENT_ID = "s21-open-api"
+SCHOOL_USERNAME = os.environ.get("SCHOOL_USERNAME")
+SCHOOL_PASSWORD = os.environ.get("SCHOOL_PASSWORD")
+
+if not SCHOOL_USERNAME or not SCHOOL_PASSWORD:
+    print("IMPORTANT: SCHOOL_USERNAME or SCHOOL_PASSWORD not set in environment variables. API validation will fail.")
+
 
 # --- Logging ---
 logging.basicConfig(
@@ -65,16 +74,63 @@ def get_text(key: str, lang: str) -> str:
     """Gets text from the locales dictionary for the given language."""
     return TEXT.get(lang, TEXT['en']).get(key, f"Missing text for key: {key}")
 
+_access_token = None
+_token_expiry_time = 0 # Unix timestamp
+
+async def get_access_token() -> str | None:
+    global _access_token, _token_expiry_time
+    current_time = time.time()
+
+    # Check if token is still valid
+    if _access_token and _token_expiry_time > current_time + 60: # Refresh 60 seconds before expiry
+        return _access_token
+
+    if not SCHOOL_USERNAME or not SCHOOL_PASSWORD:
+        logger.error("SCHOOL_USERNAME or SCHOOL_PASSWORD not set in environment variables.")
+        return None
+
+    payload = {
+        "client_id": CLIENT_ID,
+        "username": SCHOOL_USERNAME,
+        "password": SCHOOL_PASSWORD,
+        "grant_type": "password",
+    }
+    headers = {"Content-Type": "application/x-www-form-urlencoded"}
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.post(AUTH_URL, data=payload, headers=headers)
+            response.raise_for_status() # Raise an exception for 4xx or 5xx status codes
+            token_data = response.json()
+            _access_token = token_data.get("access_token")
+            expires_in = token_data.get("expires_in", 300) # Default to 5 minutes if not provided
+            _token_expiry_time = current_time + expires_in
+            logger.info("Successfully obtained new access token.")
+            return _access_token
+        except httpx.RequestError as e:
+            logger.error(f"Failed to get access token: {e}")
+            return None
+        except httpx.HTTPStatusError as e:
+            logger.error(f"HTTP error getting access token: {e.response.status_code} - {e.response.text}")
+            return None
+
 
 async def validate_nickname(nickname: str) -> dict | None:
     """
     Validates a nickname against the School 21 API using httpx.
     Returns user data if valid, None otherwise.
     """
+    token = await get_access_token()
+    if not token:
+        logger.error("No access token available for nickname validation.")
+        return None
+
     url = f"{API_BASE_URL}/participants/{nickname}"
+    headers = {"Authorization": f"Bearer {token}"}
+
     async with httpx.AsyncClient() as client:
         try:
-            response = await client.get(url)
+            response = await client.get(url, headers=headers)
             if response.status_code == 200:
                 logger.info(f"API validation successful for nickname: {nickname}")
                 return response.json()
