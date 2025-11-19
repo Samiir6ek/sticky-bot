@@ -83,3 +83,35 @@ This file will track the development process, decisions made, and the overall pl
 - **Step 6: Placeholders:** Add comments for sticker and image placeholders.
 - **Step 7: Documentation:** Write the `README.md` file.
 - **Step 8: Final Review:** Test the entire flow and ensure all requirements are met.
+
+## Development Updates
+
+### Session 2 (2025-11-19): API Integration & Flow Overhaul
+
+In this session, we significantly changed the user registration flow to improve validation and user experience.
+
+**1. Nickname Validation via API:**
+-   The bot no longer accepts any nickname. It now validates the user's nickname against the official School 21 API (`https://platform.21-school.ru/services/21-school/api/v1/participants/{login}`).
+-   This prevents users from registering with fake nicknames.
+-   If a nickname is invalid, the user is prompted to try again.
+
+**2. Automatic Stage & Tribe Detection:**
+-   Upon successful API validation, the bot automatically retrieves the user's `stage` (from `parallelName`) and `tribe` (from `className`).
+-   The manual steps for asking the user to select their stage and tribe have been removed, simplifying the conversation flow.
+
+**3. Real Name Verification:**
+-   A new step was added to the registration process: the bot now asks for the user's **full name**.
+-   This name is stored in the database in a new `real_name` column.
+-   **Purpose:** To help with identity verification when distributing the stickers at school.
+
+**4. Enhanced Admin Notifications:**
+-   The admin notification message format was changed to use HTML for more reliable bolding.
+-   The user's selected `language` was removed from the notification to make it cleaner.
+-   The user's `real_name` was added to the notification.
+-   Notifications are now sent to a **support group chat** (`-1003141015653`) in addition to the primary admin, allowing a team to manage orders.
+
+**Technical Changes:**
+-   Added `requests` to `requirements.txt` and used the `httpx` library (an existing dependency) for making asynchronous API calls.
+-   Modified `database.py` to add the `real_name` column to the `users` table and handle schema migration.
+-   Updated `locales.py` with new text for the changed flow.
+-   Overhauled the `ConversationHandler` logic in `bot.py`.

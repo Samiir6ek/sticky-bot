@@ -21,7 +21,8 @@ def db_connect():
 
 def setup_database():
     """
-    Set up the database. Creates the 'users' table if it doesn't exist.
+    Set up the database. Creates the 'users' table if it doesn't exist
+    and adds new columns if they are missing.
     This function should be called once when the bot starts.
     """
     conn = db_connect()
@@ -32,15 +33,7 @@ def setup_database():
         cursor = conn.cursor()
         # Explanation for Samir:
         # This SQL command creates the table that will store all the user information.
-        # - user_id: The user's unique Telegram ID. We use this as the PRIMARY KEY to uniquely identify users.
-        # - telegram_username: The user's @username on Telegram.
-        # - language: The language they selected (e.g., 'en', 'uz', 'ru').
-        # - nickname: Their unique school nickname.
-        # - stage: 'intensive' or 'core'.
-        # - tribe: The tribe they belong to (e.g., 'Ayiq', 'Pegasus').
-        # - chosen_logo: The tribe logo they chose for the free sticker.
-        # - registration_timestamp: The date and time they registered.
-        # 'IF NOT EXISTS' prevents an error if the table already exists.
+        # - real_name: The user's actual first/last name for verification.
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS users (
                 user_id INTEGER PRIMARY KEY,
@@ -50,10 +43,24 @@ def setup_database():
                 stage TEXT,
                 tribe TEXT,
                 chosen_logo TEXT,
+                real_name TEXT,
                 registration_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         """)
         conn.commit()
+
+        # --- Migration: Add real_name column if it doesn't exist (for existing databases) ---
+        # Explanation for Samir:
+        # This block is for safety. If we ever update the bot and add new columns,
+        # this code will safely add them to an existing database without deleting any data.
+        cursor.execute("PRAGMA table_info(users)")
+        columns = [info[1] for info in cursor.fetchall()]
+        if 'real_name' not in columns:
+            cursor.execute("ALTER TABLE users ADD COLUMN real_name TEXT")
+            conn.commit()
+            logger.info("Added 'real_name' column to existing 'users' table.")
+        # --- End of Migration ---
+
         logger.info("Database setup complete. 'users' table is ready.")
     except sqlite3.Error as e:
         logger.error(f"Error setting up database table: {e}")
@@ -81,7 +88,7 @@ def user_exists(user_id: int) -> bool:
         if conn:
             conn.close()
 
-def add_user(user_id: int, username: str, lang: str, nickname: str, stage: str, tribe: str):
+def add_user(user_id: int, username: str, lang: str, nickname: str, stage: str, tribe: str, real_name: str):
     """
     Add a new user to the database after they complete the initial registration.
     """
@@ -93,14 +100,13 @@ def add_user(user_id: int, username: str, lang: str, nickname: str, stage: str, 
         cursor = conn.cursor()
         # Explanation for Samir:
         # This command inserts a new row into the 'users' table.
-        # The '?' are placeholders that get safely replaced by the values in the tuple.
-        # This prevents a type of attack called SQL injection.
+        # We added the 'real_name' to store the user's actual name for verification.
         cursor.execute("""
-            INSERT INTO users (user_id, telegram_username, language, nickname, stage, tribe)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (user_id, username, lang, nickname, stage, tribe))
+            INSERT INTO users (user_id, telegram_username, language, nickname, stage, tribe, real_name)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (user_id, username, lang, nickname, stage, tribe, real_name))
         conn.commit()
-        logger.info(f"Added new user {user_id} ({nickname}) to the database.")
+        logger.info(f"Added new user {user_id} ({nickname}) with real name {real_name} to the database.")
     except sqlite3.Error as e:
         logger.error(f"Error adding user {user_id}: {e}")
     finally:
