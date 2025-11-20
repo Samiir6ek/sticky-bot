@@ -482,6 +482,8 @@ async def confirm_bonus_offer(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.effective_user
     lang = context.user_data.get("lang", "en")
 
+    logger.info(f"User {user.id} entered confirm_bonus_offer. Callback data: {query.data}")
+
     choice = query.data.split("_")[2] # "yes" or "no"
 
     if choice == "yes":
