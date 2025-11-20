@@ -574,7 +574,30 @@ def main() -> None:
         else:
             logger.warning(f"User {user.id} tried to use the /reset command without permission.")
 
+    async def reset_user_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """A command for the admin to reset a specific user's data."""
+        user = update.effective_user
+        if user.id != ADMIN_ID:
+            logger.warning(f"User {user.id} tried to use the /reset_user command without permission.")
+            return
+
+        if not context.args:
+            await update.message.reply_text("Please provide a user ID. Usage: /reset_user <user_id>")
+            return
+
+        try:
+            target_user_id = int(context.args[0])
+            if db.user_exists(target_user_id):
+                db.delete_user(target_user_id)
+                await update.message.reply_text(f"User with ID {target_user_id} has been successfully reset.")
+                logger.info(f"Admin {user.id} has reset data for user {target_user_id}.")
+            else:
+                await update.message.reply_text(f"User with ID {target_user_id} not found in the database.")
+        except (IndexError, ValueError):
+            await update.message.reply_text("Invalid user ID. Please provide a valid numerical user ID.")
+
     application.add_handler(CommandHandler("reset", reset_command))
+    application.add_handler(CommandHandler("reset_user", reset_user_command))
     application.add_handler(conv_handler)
 
     application.run_polling()
