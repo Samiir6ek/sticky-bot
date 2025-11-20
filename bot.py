@@ -66,7 +66,9 @@ logger = logging.getLogger(__name__)
     GET_REAL_NAME,
     CHOOSE_LOGO_STAGE,
     CHOOSE_LOGO_TRIBE,
-) = range(6)
+    AWAIT_BONUS_CHOICE,
+    AWAIT_STORY_PROOF,
+) = range(8)
 
 
 # --- Helper Functions ---
@@ -336,7 +338,6 @@ async def choose_logo_stage(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """
     Gets the final logo choice, saves it, notifies admin and group, sends confirmation and ad to user.
-    This is the final step in the conversation.
     """
     query = update.callback_query
     await query.answer()
@@ -356,10 +357,10 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         f"<b>User ID:</b> <code>{user.id}</code>\n"
         f"<b>Username:</b> @{user_details.get('telegram_username', 'N/A')}\n\n"
         f"--- Registration ---\n"
-        f"<b>Nickname:</b> {user_details.get('nickname', 'N/A')}\n"
-        f"<b>Real Name:</b> {user_details.get('real_name', 'N/A')}\n"
+        f"<b>Nickname/Login:</b> {user_details.get('nickname', 'N/A')}\n"
+        f"<b>Name:</b> {user_details.get('real_name', 'N/A')}\n"
         f"<b>Stage:</b> {user_details.get('stage', 'N/A')}\n"
-        f"<b>Tribe:</b> {user_details.get('tribe', 'N/A')}\n\n"
+        f"<b>Wave:</b> {user_details.get('tribe', 'N/A')}\n\n"
         f"--- Order ---\n"
         f"<b>Chosen Logo:</b> {chosen_logo}"
     )
@@ -417,7 +418,108 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             parse_mode='Markdown'
         )
 
-    logger.info(f"Conversation with user {user.id} finished.")
+    # --- Offer Bonus Sticker ---
+    keyboard = [
+        [
+            InlineKeyboardButton(get_text('bonus_button_yes', lang), callback_data="bonus_yes"),
+            InlineKeyboardButton(get_text('bonus_button_no', lang), callback_data="bonus_no"),
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    bonus_image_path = "images/bonus_offer.png"
+    try:
+        with open(bonus_image_path, "rb") as bonus_photo:
+            await query.message.reply_photo(
+                photo=bonus_photo,
+                caption=get_text('ask_bonus_offer', lang),
+                reply_markup=reply_markup,
+                parse_mode='Markdown'
+            )
+    except FileNotFoundError:
+        logger.error(f"Bonus offer image not found: {bonus_image_path}")
+        await query.message.reply_text(
+            text=get_text('ask_bonus_offer', lang),
+            reply_markup=reply_markup,
+            parse_mode='Markdown'
+        )
+    logger.info(f"User {user.id} offered bonus sticker.")
+    return AWAIT_BONUS_CHOICE # Transition to new state
+
+
+async def await_bonus_choice(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """
+    Handles the user's choice for the bonus sticker.
+    """
+    query = update.callback_query
+    await query.answer()
+    user = update.effective_user
+    lang = context.user_data.get("lang", "en")
+
+    choice = query.data
+
+    if choice == "bonus_yes":
+        logger.info(f"User {user.id} chose to get bonus sticker.")
+        await query.edit_message_text(
+            text=get_text('bonus_instructions', lang),
+            parse_mode='Markdown'
+        )
+        return AWAIT_STORY_PROOF
+    elif choice == "bonus_no":
+        logger.info(f"User {user.id} declined bonus sticker.")
+        await query.edit_message_text(
+            text=get_text('bonus_declined', lang),
+            parse_mode='Markdown'
+        )
+        return ConversationHandler.END
+    else:
+        # Should not happen with proper button handling
+        await query.edit_message_text(get_text('fallback_message', lang))
+        return ConversationHandler.END
+
+
+async def await_story_proof(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """
+    Handles the photo sent by the user as proof for the bonus sticker.
+    """
+    user = update.effective_user
+    lang = context.user_data.get("lang", "en")
+
+    if not update.message.photo:
+        await update.message.reply_text(get_text('bonus_instructions', lang), parse_mode='Markdown') # Ask again for photo
+        return AWAIT_STORY_PROOF
+
+    # Get the largest photo
+    photo_file = await update.message.photo[-1].get_file()
+    user_details = db.get_user_details(user.id)
+
+    caption = get_text('admin_bonus_caption', 'en').format(
+        username=user_details.get('telegram_username', 'N/A'),
+        nickname=user_details.get('nickname', 'N/A'),
+        real_name=user_details.get('real_name', 'N/A')
+    )
+
+    # Forward photo to admin group
+    try:
+        await context.bot.send_photo(
+            chat_id=GROUP_CHAT_ID,
+            photo=photo_file.file_id,
+            caption=caption,
+            parse_mode='Markdown'
+        )
+        logger.info(f"Forwarded story proof from user {user.id} to group {GROUP_CHAT_ID}.")
+    except Exception as e:
+        logger.error(f"Failed to forward story proof from user {user.id} to group {GROUP_CHAT_ID}. Error: {e}")
+        # Inform admin if forwarding fails
+        await context.bot.send_message(chat_id=ADMIN_ID, text=f"Failed to forward story proof from user {user.id}. Error: {e}")
+
+    # Update database
+    db.set_bonus_claimed(user.id)
+
+    await update.message.reply_text(
+        text=get_text('bonus_confirmation', lang),
+        parse_mode='Markdown'
+    )
     return ConversationHandler.END
 
 
@@ -481,6 +583,13 @@ def main() -> None:
             ],
             CHOOSE_LOGO_TRIBE: [
                 CallbackQueryHandler(choose_logo_tribe, pattern="^logo_tribe_"),
+            ],
+            AWAIT_BONUS_CHOICE: [
+                CallbackQueryHandler(await_bonus_choice, pattern="^bonus_"),
+            ],
+            AWAIT_STORY_PROOF: [
+                MessageHandler(filters.PHOTO, await_story_proof),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, await_story_proof),
             ],
         },
         fallbacks=[

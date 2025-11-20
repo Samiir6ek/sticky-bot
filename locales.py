@@ -21,9 +21,9 @@ TEXT = {
         'confirm_button': "✅ I have subscribed",
         'not_subscribed': "⚠️ You haven't subscribed to the channel yet. Please subscribe to proceed.",
         'already_registered': "You have already registered for a free sticker! Your order is being prepared.",
-        'ask_nickname': "✅ Subscription confirmed!\n\nLet's get you registered. What is your **nickname** at school 21?",
+        'ask_nickname': "✅ Subscription confirmed!\n\nLet's get you registered. What is your **nickname/login** at school 21?",
         'invalid_nickname': "⚠️ **Invalid Nickname**\n\nWe couldn't find the nickname `{nickname}` in the school's database. Please check for typos and try again.",
-        'ask_real_name': "✅ Nickname `{nickname}` verified!\n\nNow, please enter your **full name** (e.g., John Doe). This will be used to verify your identity when you pick up the sticker.",
+        'ask_real_name': "✅ Nickname `{nickname}` verified!\n\nNow, please enter your **name** (e.g., John Doe). This will be used to verify your identity when you pick up the sticker.",
         'ask_stage': "Got it, `{nickname}`! Now, please select your **stage**.",
         'intensive_button': "🚀 Intensive",
         'core_button': "🌱 Core",
@@ -34,7 +34,7 @@ TEXT = {
         'ask_logo_stage': "Which stage's logos would you like to choose from?",
         'ask_logo_tribe': "Please choose a logo for your sticker.",
         'order_complete': "✅ **Order Confirmed!**\n\nYour `{chosen_logo}` sticker is confirmed. "
-                        "You can pick up your order on November 21st or November 28th.\nThe exact location will be announced on our channel.\n\n"
+                        "The order will be available in volunteers room from 26th november and you can pick it up from there any time you want!\n\n"
                         "Thank you for participating!",
         'admin_notification': "🔔 **New Sticker Order**\n\n"
                               "**User ID:** `{user_id}`\n"
@@ -55,7 +55,14 @@ TEXT = {
                          "Just send me the 10-20 images you want, tell me the sizes, and I'll handle the rest. "
                          "Click the button below to start your custom order!",
         'contact_me_button': "💬 Contact Samir",
-        'fallback_message': "Sorry, I didn't understand that. Please use the buttons or follow the instructions."
+        'fallback_message': "Sorry, I didn't understand that. Please use the buttons or follow the instructions.",
+        'ask_bonus_offer': "🔥 **Want an Extra FREE Sticker?** 🔥\n\nShare *any* post from our @sticky_online_store channel to your Telegram (or Instagram) story for 24 hours, and get a **special bonus sticker** with your order! ✨",
+        'bonus_button_yes': "👍 Let's do it!",
+        'bonus_button_no': "👎 No, thanks.",
+        'bonus_instructions': "Great! Please share a post from our channel to your story. Once it's live, **download the image of your story** and send it back to me here as proof!",
+        'bonus_confirmation': "Thank you for sharing! We've received your story proof. Your special bonus sticker has been added to your order! 🎉",
+        'bonus_declined': "No worries! Your order is complete, and we hope you love your sticker. 😊",
+        'admin_bonus_caption': "✅ **Bonus Sticker Proof**\n\nUser: @{username}\nNickname/Login: {nickname}\nName: {real_name}\n\nPlease verify their story."
     },
     'uz': {
         'welcome': "👋 Salom! Men **sticky_online_store**'ning rasmiy botiman.\n\n"
@@ -68,9 +75,9 @@ TEXT = {
         'confirm_button': "✅ Obuna bo'ldim",
         'not_subscribed': "⚠️ Siz hali kanalga obuna bo'lmagansiz. Davom etish uchun obuna bo'ling.",
         'already_registered': "Siz allaqachon bepul stiker uchun ro'yxatdan o'tgansiz! Buyurtmangiz tayyorlanmoqda.",
-        'ask_nickname': "✅ Obuna tasdiqlandi!\n\nKeling, sizni ro'yxatdan o'tkazamiz. 21-maktabdagi **nikneymingiz** nima?",
+        'ask_nickname': "✅ Obuna tasdiqlandi!\n\nKeling, sizni ro'yxatdan o'tkazamiz. 21-maktabdagi **nikneym/login** nima?",
         'invalid_nickname': "⚠️ **Noto'g'ri Nikneym**\n\n`{nickname}` nikneymi maktab ma'lumotlar bazasidan topilmadi. Iltimos, xatoliklarni tekshiring va qaytadan urunib ko'ring.",
-        'ask_real_name': "✅ `{nickname}` nikneymi tasdiqlandi!\n\nEndi, iltimos, **to'liq ismingizni** kiriting (masalan, Aziz Azizov). Bu ma'lumot stikerni olayotganingizda shaxsingizni tasdiqlash uchun ishlatiladi.",
+        'ask_real_name': "✅ `{nickname}` nikneymi tasdiqlandi!\n\nEndi, iltimos, **ismingizni** kiriting (masalan, Aziz Azizov). Bu ma'lumot stikerni olayotganingizda shaxsingizni tasdiqlash uchun ishlatiladi.",
         'ask_stage': "Tushunarli, `{nickname}`! Endi, iltimos, o'z **bosqichingizni** tanlang.",
         'intensive_button': "🚀 Intensive",
         'core_button': "🌱 Core",
@@ -80,7 +87,7 @@ TEXT = {
         'ask_logo_stage': "Qaysi bosqich trayb logotiplaridan tanlamoqchisiz?",
         'ask_logo_tribe': "Iltimos, stikeringiz uchun logotip tanlang.",
         'order_complete': "✅ **Buyurtma tasdiqlandi!**\n\nSizning `{chosen_logo}` stikeringiz tasdiqlandi. "
-                        "Buyurtmangizni 21-noyabr yoki 28-noyabr kuni olishingiz mumkin.\nAniq joylashuvni kanalimizda e’lon qilamiz.\n\n"
+                        "Buyurtma 26-noyabrdan boshlab volonterlar xonasida bo'ladi va uni xohlagan vaqtda olib ketishingiz mumkin!\n\n"
                         "Ishtirokingiz uchun rahmat!",
         'admin_notification': "🔔 **Yangi stiker buyurtmasi**\n\n"
                               "**Foydalanuvchi ID'si:** `{user_id}`\n"
@@ -101,7 +108,14 @@ TEXT = {
                          "Menga 10-20 ta xohlagan rasmingizni yuboring, o'lchamlarini ayting, qolganini o'zim hal qilaman. "
                          "Maxsus buyurtmangizni boshlash uchun quyidagi tugmani bosing!",
         'contact_me_button': "💬 Samir bilan bog'lanish",
-        'fallback_message': "Kechirasiz, men buni tushunmadim. Iltimos, tugmalardan foydalaning yoki ko'rsatmalarga amal qiling."
+        'fallback_message': "Kechirasiz, men buni tushunmadim. Iltimos, tugmalardan foydalaning yoki ko'rsatmalarga amal qiling.",
+        'ask_bonus_offer': "🔥 **Qo'shimcha BEPUL stiker xohlaysizmi?** 🔥\n\n@sticky_online_store kanalimizdagi *istalgan* xabarni 24 soat davomida Telegram (yoki Instagram) hikoyangizda ulashing va buyurtmangizga **maxsus bonus stiker** oling! ✨",
+        'bonus_button_yes': "👍 Bo'ldi, qilaman!",
+        'bonus_button_no': "👎 Yo'q, rahmat.",
+        'bonus_instructions': "Ajoyib! Iltimos, kanalimizdagi biror xabarni hikoyangizga joylashtiring. U nashr qilingandan so'ng, **hikoyangiz rasmini yuklab oling** va menga dalil sifatida yuboring!",
+        'bonus_confirmation': "Ulashingiz uchun rahmat! Hikoyangiz tasdig'ini oldik. Maxsus bonus stikeringiz buyurtmangizga qo'shildi! 🎉",
+        'bonus_declined': "Xavotir olmang! Buyurtmangiz yakunlandi, stikeringiz sizga yoqadi degan umiddamiz. 😊",
+        'admin_bonus_caption': "✅ **Bonus stiker tasdig'i**\n\nFoydalanuvchi: @{username}\nNikneym/Login: {nickname}\nIsm: {real_name}\n\nIltimos, hikoyasini tekshiring."
     },
     'ru': {
         'welcome': "👋 Привет! Я официальный бот **sticky_online_store**.\n\n"
@@ -114,9 +128,9 @@ TEXT = {
         'confirm_button': "✅ Я подписался",
         'not_subscribed': "⚠️ Вы еще не подписались на канал. Пожалуйста, подпишитесь, чтобы продолжить.",
         'already_registered': "Вы уже зарегистрировались на получение бесплатного стикера! Ваш заказ готовится.",
-        'ask_nickname': "✅ Подписка подтверждена!\n\nДавайте вас зарегистрируем. Какой у вас **никнейм** в школе 21?",
+        'ask_nickname': "✅ Подписка подтверждена!\n\nДавайте вас зарегистрируем. Какой у вас **никнейм/логин** в школе 21?",
         'invalid_nickname': "⚠️ **Неверный Никнейм**\n\nНикнейм `{nickname}` не найден в базе данных школы. Пожалуйста, проверьте правильность написания и попробуйте снова.",
-        'ask_real_name': "✅ Никнейм `{nickname}` подтвержден!\n\nТеперь, пожалуйста, введите ваше **полное имя** (например, Иван Иванов). Это имя будет использоваться для подтверждения вашей личности при получении стикера.",
+        'ask_real_name': "✅ Никнейм `{nickname}` подтвержден!\n\nТеперь, пожалуйста, введите ваше **имя** (например, Иван Иванов). Это имя будет использоваться для подтверждения вашей личности при получении стикера.",
         'ask_stage': "Понял, `{nickname}`! Теперь, пожалуйста, выберите ваш **этап**.",
         'intensive_button': "🚀 Интенсив",
         'core_button': "🌱 Основа",
@@ -126,7 +140,7 @@ TEXT = {
         'ask_logo_stage': "Логотипы какого этапа вы бы хотели выбрать?",
         'ask_logo_tribe': "Пожалуйста, выберите логотип для вашего стикера.",
         'order_complete': "✅ **Заказ подтвержден!**\n\nВаш стикер «{chosen_logo}» подтвержден. "
-                        "Вы можете забрать свой заказ 21 ноября или 28 ноября.\nТочное место мы объявим на нашем канале.\n\n"
+                        "Заказ будет доступен в комнате волонтеров с 26 ноября, и вы сможете забрать его оттуда в любое удобное для вас время!\n\n"
                         "Спасибо за участие!",
         'admin_notification': "🔔 **Новый заказ на стикер**\n\n"
                               "**ID пользователя:** `{user_id}`\n"
@@ -147,7 +161,14 @@ TEXT = {
                          "Просто пришлите мне 10-20 изображений, которые вы хотите, укажите размеры, а я займусь остальным. "
                          "Нажмите кнопку ниже, чтобы начать ваш индивидуальный заказ!",
         'contact_me_button': "💬 Связаться с Самиром",
-        'fallback_message': "Извините, я не понял. Пожалуйста, используйте кнопки или следуйте инструкциям."
+        'fallback_message': "Извините, я не понял. Пожалуйста, используйте кнопки или следуйте инструкциям.",
+        'ask_bonus_offer': "🔥 **Хотите дополнительный БЕСПЛАТНЫЙ стикер?** 🔥\n\nПоделитесь *любым* постом из нашего канала @sticky_online_store в своей истории Telegram (или Instagram) на 24 часа и получите **специальный бонусный стикер** к вашему заказу! ✨",
+        'bonus_button_yes': "👍 Сделаю!",
+        'bonus_button_no': "👎 Нет, спасибо.",
+        'bonus_instructions': "Отлично! Пожалуйста, поделитесь постом из нашего канала в своей истории. Как только он будет опубликован, **скачайте изображение вашей истории** и отправьте его мне сюда в качестве подтверждения!",
+        'bonus_confirmation': "Спасибо за то, что поделились! Мы получили подтверждение вашей истории. Ваш специальный бонусный стикер добавлен к вашему заказу! 🎉",
+        'bonus_declined': "Ничего страшного! Ваш заказ завершен, надеемся, вам понравится ваш стикер. 😊",
+        'admin_bonus_caption': "✅ **Подтверждение бонусного стикера**\n\nПользователь: @{username}\nНикнейм/Логин: {nickname}\nИмя: {real_name}\n\nПожалуйста, проверьте его историю."
     }
 }
 
