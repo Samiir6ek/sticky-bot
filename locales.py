@@ -59,6 +59,9 @@ TEXT = {
         'get_bonus_button': "✨ Get Bonus Sticker",
         'fallback_message': "Sorry, I didn't understand that. Please use the buttons or follow the instructions.",
         'bonus_instructions': "Great! To get an extra FREE sticker, share *any* post from our @sticky_online_store channel to your Telegram (or Instagram) story for 24 hours. Once it's live, **download the image of your story** and send it back to me here as proof!",
+        'bonus_yes_button': "✅ Yes, I want the bonus!",
+        'bonus_no_button': "❌ No, thanks.",
+        'bonus_no_thanks': "Okay, no problem! If you change your mind, you can always start over with /start.",
         'bonus_confirmation': "Thank you for sharing! We've received your story proof. Your special bonus sticker has been added to your order! 🎉",
         'admin_bonus_caption': "✅ **Bonus Sticker Proof**\n\nUser: @{username}\nNickname/Login: {nickname}\nName: {real_name}\n\nPlease verify their story."
     },
@@ -110,6 +113,9 @@ TEXT = {
         'get_bonus_button': "✨ Bonus stikerini olish",
         'fallback_message': "Kechirasiz, men buni tushunmadim. Iltimos, tugmalardan foydalaning yoki ko'rsatmalarga amal qiling.",
         'bonus_instructions': "Ajoyib! Qo'shimcha BEPUL stiker olish uchun, @sticky_online_store kanalimizdagi *istalgan* xabarni 24 soat davomida Telegram (yoki Instagram) hikoyangizda ulashing. U nashr qilingandan so'ng, **hikoyangiz rasmini yuklab oling** va menga dalil sifatida yuboring!",
+        'bonus_yes_button': "✅ Ha, bonusni xohlayman!",
+        'bonus_no_button': "❌ Yo'q, rahmat.",
+        'bonus_no_thanks': "Yaxshi, muammo yo'q! Agar fikringiz o'zgarsa, /start buyrug'i bilan qaytadan boshlashingiz mumkin.",
         'bonus_confirmation': "Ulashingiz uchun rahmat! Hikoyangiz tasdig'ini oldik. Maxsus bonus stikeringiz buyurtmangizga qo'shildi! 🎉",
         'admin_bonus_caption': "✅ **Bonus stiker tasdig'i**\n\nFoydalanuvchi: @{username}\nNikneym/Login: {nickname}\nIsm: {real_name}\n\nIltimos, hikoyasini tekshiring."
     },
@@ -161,6 +167,9 @@ TEXT = {
         'get_bonus_button': "✨ Получить бонусный стикер",
         'fallback_message': "Извините, я не понял. Пожалуйста, используйте кнопки или следуйте инструкциям.",
         'bonus_instructions': "Отлично! Чтобы получить дополнительный БЕСПЛАТНЫЙ стикер, поделитесь *любым* постом из нашего канала @sticky_online_store в своей истории Telegram (или Instagram) на 24 часа. Как только он будет опубликован, **скачайте изображение вашей истории** и отправьте его мне сюда в качестве подтверждения!",
+        'bonus_yes_button': "✅ Да, я хочу бонус!",
+        'bonus_no_button': "❌ Нет, спасибо.",
+        'bonus_no_thanks': "Хорошо, без проблем! Если передумаете, всегда можете начать заново с /start.",
         'bonus_confirmation': "Спасибо за то, что поделились! Мы получили подтверждение вашей истории. Ваш специальный бонусный стикер добавлен к вашему заказу! 🎉",
         'admin_bonus_caption': "✅ **Подтверждение бонусного стикера**\n\nПользователь: @{username}\nНикнейм/Логин: {nickname}\nИмя: {real_name}\n\nПожалуйста, проверьте его историю."
     }
