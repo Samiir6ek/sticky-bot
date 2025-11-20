@@ -219,11 +219,18 @@ async def check_subscription(update: Update, context: ContextTypes.DEFAULT_TYPE)
         member = await context.bot.get_chat_member(chat_id=CHANNEL_USERNAME, user_id=user.id)
         if member.status not in ["left", "kicked"]:
             logger.info(f"User {user.id} is subscribed to {CHANNEL_USERNAME}.")
+            if 'last_error_msg_id' in context.user_data:
+                try:
+                    await context.bot.delete_message(chat_id=user.id, message_id=context.user_data['last_error_msg_id'])
+                    del context.user_data['last_error_msg_id']
+                except Exception as e:
+                    logger.info(f"Could not delete stale error message for user {user.id}: {e}")
             await query.edit_message_text(text=get_text('ask_nickname', lang), parse_mode='Markdown')
             return GET_NICKNAME
         else:
             logger.info(f"User {user.id} is NOT subscribed to {CHANNEL_USERNAME}.")
-            await query.message.reply_text(text=get_text('not_subscribed', lang), parse_mode='Markdown')
+            error_message = await query.message.reply_text(text=get_text('not_subscribed', lang), parse_mode='Markdown')
+            context.user_data['last_error_msg_id'] = error_message.message_id
             # We return to the same state to let them click the button again
             return CHECK_SUB
     except Exception as e:
@@ -436,8 +443,9 @@ async def await_bonus_choice(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
     logger.info(f"User {user.id} chose to get bonus sticker.")
     # Since this function is only triggered by the 'bonus_yes' callback,
-    # we edit the message to show the instructions directly.
-    await query.edit_message_text(
+    # we remove the buttons from the ad and send the instructions in a new message.
+    await query.edit_message_reply_markup(reply_markup=None)
+    await query.message.reply_text(
         text=get_text('bonus_instructions', lang),
         parse_mode='Markdown'
     )
