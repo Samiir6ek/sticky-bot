@@ -115,3 +115,19 @@ In this session, we significantly changed the user registration flow to improve 
 -   Modified `database.py` to add the `real_name` column to the `users` table and handle schema migration.
 -   Updated `locales.py` with new text for the changed flow.
 -   Overhauled the `ConversationHandler` logic in `bot.py`.
+
+### Session 3 (2025-11-20): Terminology Updates & Bonus Flow Enhancement
+
+This session focused on refining the bot's language based on user feedback and improving the bonus sticker acquisition flow.
+
+**1. Terminology Changes:**
+-   **Tribe -> Wave:** The term "Tribe" was replaced with "Wave" in the admin notification message for new orders to reflect the correct internal terminology.
+-   **Nickname -> Nickname/Login:** To avoid confusion, the prompt for the user's nickname was changed to "**Nickname/Login**" in all user-facing messages and in the admin notifications.
+-   **Full Name -> Name:** The request for a "full name" was simplified to just "name" to reduce friction during registration.
+
+**2. Bonus Offer Enhancement:**
+-   The bonus sticker offer, which appears after the main advertisement, was changed from a text-only message to a photo with a caption.
+-   The bot now sends an image (`images/bonus_offer.png`) that can visually present the bonus choices, with the offer text as the caption.
+
+**3. Code Deployment:**
+-   All changes from this session were committed and pushed to the `main` branch of the remote GitHub repository.

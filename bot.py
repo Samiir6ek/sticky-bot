@@ -397,7 +397,10 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         )
 
     ad_keyboard = [
-        [InlineKeyboardButton(get_text('contact_me_button', lang), url="https://t.me/JUST_Samir")]
+        [
+            InlineKeyboardButton(get_text('contact_me_button', lang), url="https://t.me/JUST_Samir"),
+            InlineKeyboardButton(get_text('get_bonus_button', lang), callback_data="bonus_yes"),
+        ]
     ]
     ad_markup = InlineKeyboardMarkup(ad_keyboard)
 
@@ -418,31 +421,6 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             parse_mode='Markdown'
         )
 
-    # --- Offer Bonus Sticker ---
-    keyboard = [
-        [
-            InlineKeyboardButton(get_text('bonus_button_yes', lang), callback_data="bonus_yes"),
-            InlineKeyboardButton(get_text('bonus_button_no', lang), callback_data="bonus_no"),
-        ]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-
-    bonus_image_path = "images/bonus_offer.png"
-    try:
-        with open(bonus_image_path, "rb") as bonus_photo:
-            await query.message.reply_photo(
-                photo=bonus_photo,
-                caption=get_text('ask_bonus_offer', lang),
-                reply_markup=reply_markup,
-                parse_mode='Markdown'
-            )
-    except FileNotFoundError:
-        logger.error(f"Bonus offer image not found: {bonus_image_path}")
-        await query.message.reply_text(
-            text=get_text('ask_bonus_offer', lang),
-            reply_markup=reply_markup,
-            parse_mode='Markdown'
-        )
     logger.info(f"User {user.id} offered bonus sticker.")
     return AWAIT_BONUS_CHOICE # Transition to new state
 
@@ -456,26 +434,14 @@ async def await_bonus_choice(update: Update, context: ContextTypes.DEFAULT_TYPE)
     user = update.effective_user
     lang = context.user_data.get("lang", "en")
 
-    choice = query.data
-
-    if choice == "bonus_yes":
-        logger.info(f"User {user.id} chose to get bonus sticker.")
-        await query.edit_message_text(
-            text=get_text('bonus_instructions', lang),
-            parse_mode='Markdown'
-        )
-        return AWAIT_STORY_PROOF
-    elif choice == "bonus_no":
-        logger.info(f"User {user.id} declined bonus sticker.")
-        await query.edit_message_text(
-            text=get_text('bonus_declined', lang),
-            parse_mode='Markdown'
-        )
-        return ConversationHandler.END
-    else:
-        # Should not happen with proper button handling
-        await query.edit_message_text(get_text('fallback_message', lang))
-        return ConversationHandler.END
+    logger.info(f"User {user.id} chose to get bonus sticker.")
+    # Since this function is only triggered by the 'bonus_yes' callback,
+    # we edit the message to show the instructions directly.
+    await query.edit_message_text(
+        text=get_text('bonus_instructions', lang),
+        parse_mode='Markdown'
+    )
+    return AWAIT_STORY_PROOF
 
 
 async def await_story_proof(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -585,7 +551,7 @@ def main() -> None:
                 CallbackQueryHandler(choose_logo_tribe, pattern="^logo_tribe_"),
             ],
             AWAIT_BONUS_CHOICE: [
-                CallbackQueryHandler(await_bonus_choice, pattern="^bonus_"),
+                CallbackQueryHandler(await_bonus_choice, pattern="^bonus_yes$"),
             ],
             AWAIT_STORY_PROOF: [
                 MessageHandler(filters.PHOTO, await_story_proof),
@@ -595,6 +561,7 @@ def main() -> None:
         fallbacks=[
             MessageHandler(filters.TEXT | filters.COMMAND, fallback),
         ],
+        conversation_timeout=3600  # End conversation after 1 hour of inactivity
     )
 
     async def reset_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
