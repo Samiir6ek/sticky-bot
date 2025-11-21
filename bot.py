@@ -67,9 +67,8 @@ logger = logging.getLogger(__name__)
     CHOOSE_LOGO_STAGE,
     CHOOSE_LOGO_TRIBE,
     AWAIT_BONUS_CHOICE,
-    CONFIRM_BONUS_OFFER, # New state for confirming bonus choice
     AWAIT_STORY_PROOF,
-) = range(9) # Increased range by 1
+) = range(7) # Decreased range by 2 (removed CONFIRM_BONUS_OFFER and AWAIT_BONUS_CHOICE)
 
 
 # --- Helper Functions ---
@@ -406,8 +405,7 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 
     ad_keyboard = [
         [
-            InlineKeyboardButton(get_text('contact_me_button', lang), url="https://t.me/JUST_Samir"),
-            InlineKeyboardButton(get_text('get_bonus_button', lang), callback_data="bonus_yes"),
+            InlineKeyboardButton(get_text('agree_to_post_button', lang), callback_data="agree_to_post"),
         ]
     ]
     ad_markup = InlineKeyboardMarkup(ad_keyboard)
@@ -429,77 +427,11 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             parse_mode='Markdown'
         )
 
-    logger.info(f"User {user.id} offered bonus sticker.")
-    return AWAIT_BONUS_CHOICE # Transition to new state
+    logger.info(f"User {user.id} offered login sticker for story.")
+    return AWAIT_STORY_PROOF # Transition directly to AWAIT_STORY_PROOF
 
 
-async def await_bonus_choice(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """
-    Handles the user's choice for the bonus sticker.
-    """
-    query = update.callback_query
-    await query.answer()
-    user = update.effective_user
-    lang = context.user_data.get("lang", "en")
 
-    logger.info(f"User {user.id} chose to get bonus sticker.")
-
-    # Define the keyboard for bonus choice
-    bonus_keyboard = [
-        [
-            InlineKeyboardButton(get_text('bonus_yes_button', lang), callback_data="bonus_confirm_yes"),
-            InlineKeyboardButton(get_text('bonus_no_button', lang), callback_data="bonus_confirm_no"),
-        ]
-    ]
-    bonus_markup = InlineKeyboardMarkup(bonus_keyboard)
-
-    bonus_image_path = "images/bonus_offer.png"
-    try:
-        with open(bonus_image_path, "rb") as photo:
-            await query.message.reply_photo(
-                photo=photo,
-                caption=get_text('bonus_instructions', lang),
-                reply_markup=bonus_markup,
-                parse_mode='Markdown'
-            )
-    except FileNotFoundError:
-        logger.error(f"Bonus offer image not found: {bonus_image_path}")
-        await query.message.reply_text(
-            text=get_text('bonus_instructions', lang),
-            reply_markup=bonus_markup,
-            parse_mode='Markdown'
-        )
-
-    return CONFIRM_BONUS_OFFER # Transition to new state to await yes/no
-
-
-async def confirm_bonus_offer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """
-    Handles the user's confirmation of the bonus offer (yes/no).
-    """
-    query = update.callback_query
-    await query.answer()
-    user = update.effective_user
-    lang = context.user_data.get("lang", "en")
-
-    logger.info(f"User {user.id} entered confirm_bonus_offer. Callback data: {query.data}")
-
-    choice = query.data.split("_")[2] # "yes" or "no"
-
-    if choice == "yes":
-        logger.info(f"User {user.id} confirmed wanting the bonus sticker.")
-        await query.edit_message_text(
-            text=get_text('bonus_instructions', lang), # Re-send instructions as text
-            parse_mode='Markdown'
-        )
-        return AWAIT_STORY_PROOF
-    else: # choice == "no"
-        logger.info(f"User {user.id} declined the bonus sticker.")
-        await query.edit_message_text(
-            text=get_text('bonus_no_thanks', lang),
-            parse_mode='Markdown'
-        )
-        return ConversationHandler.END
 
 
 async def await_story_proof(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -517,7 +449,7 @@ async def await_story_proof(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     photo_file = await update.message.photo[-1].get_file()
     user_details = db.get_user_details(user.id)
 
-    caption = get_text('admin_bonus_caption', 'en').format(
+    caption = get_text('admin_story_proof_caption', 'en').format(
         username=user_details.get('telegram_username', 'N/A'),
         nickname=user_details.get('nickname', 'N/A'),
         real_name=user_details.get('real_name', 'N/A')
@@ -540,8 +472,14 @@ async def await_story_proof(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     # Update database
     db.set_bonus_claimed(user.id)
 
+    contact_keyboard = [
+        [InlineKeyboardButton(get_text('contact_me_button', lang), url="https://t.me/JUST_Samir")]
+    ]
+    contact_markup = InlineKeyboardMarkup(contact_keyboard)
+
     await update.message.reply_text(
-        text=get_text('bonus_confirmation', lang),
+        text=get_text('final_order_confirmation', lang),
+        reply_markup=contact_markup,
         parse_mode='Markdown'
     )
     return ConversationHandler.END
@@ -587,13 +525,6 @@ def main() -> None:
             ],
             CHOOSE_LOGO_TRIBE: [
                 CallbackQueryHandler(choose_logo_tribe, pattern="^logo_tribe_"),
-            ],
-            AWAIT_BONUS_CHOICE: [
-                CallbackQueryHandler(await_bonus_choice, pattern="^bonus_yes$"),
-            ],
-            CONFIRM_BONUS_OFFER: [
-                CallbackQueryHandler(confirm_bonus_offer, pattern="^bonus_confirm_yes$"),
-                CallbackQueryHandler(confirm_bonus_offer, pattern="^bonus_confirm_no$"),
             ],
             AWAIT_STORY_PROOF: [
                 MessageHandler(filters.PHOTO, await_story_proof),

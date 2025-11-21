@@ -47,23 +47,17 @@ TEXT = {
                               "**Tribe:** `{tribe}`\n\n" \
                               "--- Order ---\n" \
                               "**Chosen Logo:** `{chosen_logo}`",
-        'advertisement': "🔥 **Want a sticker with YOUR nickname on it?** 🔥\n\n" \
+        'advertisement': "🔥 **Want a sticker with YOUR nickname/login on it?** 🔥\n\n" \
                          "It's the ultimate custom sticker that no one else has!\n\n" \
-                         "**SPECIAL OFFER:**\n" \
-                         "➡️ Buy **10** custom stickers of your choice, and get **1** FREE nickname sticker.\n" \
-                         "➡️ Buy **20** custom stickers, and get **2** FREE nickname stickers!\n\n" \
-                         "Just send me the 10-20 images you want, tell me the sizes, and I'll handle the rest.\n\n" \
-                         "You can also get an **EXTRA FREE** sticker by sharing a post from our channel to your story! " \
-                         "Click the buttons below to start a custom order or get your bonus sticker.",
+                         "To get your **FREE** nickname/login sticker, share [THIS POST](YOUR_POST_URL_HERE) from our @sticky\\_online\\_store channel to your Telegram (or Instagram) story for 24 hours.\n\n" \
+                         "Press 'Okay' to confirm you agree to post the story and proceed to send proof.",
         'contact_me_button': "💬 Contact Samir",
         'get_bonus_button': "✨ Get Bonus Sticker",
         'fallback_message': "Sorry, I didn't understand that. Please use the buttons or follow the instructions.",
-        'bonus_instructions': "Great! To get an extra FREE sticker, share [THIS POST](YOUR_POST_URL_HERE) from our @sticky\\_online\\_store channel to your Telegram (or Instagram) story for 24 hours. Once it's live, **download the image of your story** and send it back to me here as proof!",
-        'bonus_yes_button': "✅ Yes, I want the bonus!",
-        'bonus_no_button': "❌ No, thanks.",
-        'bonus_no_thanks': "Okay, no problem! If you change your mind, you can always start over with /start.",
-        'bonus_confirmation': "Thank you for sharing! We've received your story proof. Your special bonus sticker has been added to your order! 🎉",
-        'admin_bonus_caption': "✅ **Bonus Sticker Proof**\n\nUser: @{username}\nNickname/Login: {nickname}\nName: {real_name}\n\nPlease verify their story."
+        'agree_to_post_button': "✅ Okay, I'll post it!",
+        'final_order_confirmation': "Thank you for sharing! We've received your story proof. Your special nickname/login sticker has been added to your order! 🎉\n\n" \
+                                    "If you have any questions or want to order more customized stickers, feel free to contact me!",
+        'admin_story_proof_caption': "✅ **Nickname/Login Sticker Story Proof**\n\nUser: @{username}\nNickname/Login: {nickname}\nName: {real_name}\n\nPlease verify their story."
     },
     'uz': {
         'welcome': "👋 Salom! Men **sticky_online_store**'ning rasmiy botiman.\n\n" \
@@ -103,12 +97,8 @@ TEXT = {
                               "**Tanlangan logo:** `{chosen_logo}`",
         'advertisement': "🔥 **O'Z nikneymingiz tushirilgan stiker xohlaysizmi?** 🔥\n\n" \
                          "Bu hech kimda yo'q, noyob stiker!\n\n" \
-                         "**MAXSUS TAKLIF:**\n" \
-                         "➡️ O'zingiz tanlagan **10** ta stikerga buyurtma bering va **1** ta BEPUL nikneym stikerini qo'lga kiriting.\n" \
-                         "➡️ **20** ta stikerga buyurtma bering va **2** ta BEPUL nikneym stikerini oling!\n\n" \
-                         "Menga 10-20 ta xohlagan rasmingizni yuboring, o'lchamlarini ayting, qolganini o'zim hal qilaman.\n\n" \
-                         "Shuningdek, kanalimizdan biror postni hikoyangizda ulashib, **QO'SHIMCHA BEPUL** stiker olishingiz mumkin! " \
-                         "Maxsus buyurtma berish yoki bonus stikerni olish uchun quyidagi tugmalarni bosing.",
+                         "Bepul nikneym/login stikerini olish uchun, @sticky\\_online\\_store kanalimizdagi [USHBU POSTNI](YOUR_POST_URL_HERE) 24 soat davomida Telegram (yoki Instagram) hikoyangizda ulashing.\n\n" \
+                         "Hikoyani joylashtirishga rozi ekanligingizni tasdiqlash uchun 'Okay' tugmasini bosing.",
         'contact_me_button': "💬 Samir bilan bog'lanish",
         'get_bonus_button': "✨ Bonus stikerini olish",
         'fallback_message': "Kechirasiz, men buni tushunmadim. Iltimos, tugmalardan foydalaning yoki ko'rsatmalarga amal qiling.",
@@ -155,23 +145,15 @@ TEXT = {
                               "**Трайб:** `{tribe}`\n\n" \
                               "--- Заказ ---\n" \
                               "**Выбранный логотип:** `{chosen_logo}`",
-        'advertisement': "🔥 **Хотите стикер с ВАШИМ никнеймом?** 🔥\n\n" \
+        'advertisement': "🔥 **Хотите стикер с ВАШИМ никнеймом/логином?** 🔥\n\n" \
                          "Это уникальный кастомный стикер, которого нет больше ни у кого!\n\n" \
-                         "**СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ:**\n" \
-                         "➡️ Купите **10** любых стикеров на ваш выбор и получите **1** БЕСПЛАТНЫЙ стикер с никнеймом.\n" \
-                         "➡️ Купите **20** стикеров и получите **2** БЕСПЛАТНЫХ стикера с никнеймом!\n\n" \
-                         "Просто пришлите мне 10-20 изображений, которые вы хотите, укажите размеры, а я займусь остальным.\n\n" \
-                         "Вы также можете получить **ДОПОЛНИТЕЛЬНЫЙ БЕСПЛАТНЫЙ** стикер, поделившись постом из нашего канала в своей истории! " \
-                         "Нажмите кнопки ниже, чтобы начать индивидуальный заказ или получить бонусный стикер.",
-        'contact_me_button': "💬 Связаться с Самиром",
-        'get_bonus_button': "✨ Получить бонусный стикер",
+                         "Чтобы получить **БЕСПЛАТНЫЙ** стикер с никнеймом/логином, поделитесь [ЭТИМ ПОСТОМ](YOUR_POST_URL_HERE) из нашего канала @sticky\\_online\\_store в своей истории Telegram (или Instagram) на 24 часа.\n\n" \
+                         "Нажмите «ОК», чтобы подтвердить согласие на публикацию истории и отправить подтверждение.",
         'fallback_message': "Извините, я не понял. Пожалуйста, используйте кнопки или следуйте инструкциям.",
-        'bonus_instructions': "Отлично! Чтобы получить дополнительный БЕСПЛАТНЫЙ стикер, поделитесь [ЭТИМ ПОСТОМ](YOUR_POST_URL_HERE) из нашего канала @sticky\\_online\\_store в своей истории Telegram (или Instagram) на 24 часа. Как только он будет опубликован, **скачайте изображение вашей истории** и отправьте его мне сюда в качестве подтверждения!",
-        'bonus_yes_button': "✅ Да, я хочу бонус!",
-        'bonus_no_button': "❌ Нет, спасибо.",
-        'bonus_no_thanks': "Хорошо, без проблем! Если передумаете, всегда можете начать заново с /start.",
-        'bonus_confirmation': "Спасибо за то, что поделились! Мы получили подтверждение вашей истории. Ваш специальный бонусный стикер добавлен к вашему заказу! 🎉",
-        'admin_bonus_caption': "✅ **Подтверждение бонусного стикера**\n\nПользователь: @{username}\nНикнейм/Логин: {nickname}\nИмя: {real_name}\n\nПожалуйста, проверьте его историю."
+        'agree_to_post_button': "✅ Ок, опубликую!",
+        'final_order_confirmation': "Спасибо за то, что поделились! Мы получили подтверждение вашей истории. Ваш специальный стикер с никнеймом/логином добавлен к вашему заказу! 🎉\n\n" \
+                                    "Если у вас есть вопросы или вы хотите заказать больше индивидуальных стикеров, свяжитесь со мной!",
+        'admin_story_proof_caption': "✅ **Подтверждение истории стикера с никнеймом/логином**\n\nПользователь: @{username}\nНикнейм/Логин: {nickname}\nИмя: {real_name}\n\nПожалуйста, проверьте его историю."
     }
 }
 
