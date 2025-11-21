@@ -387,7 +387,7 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             logger.error(f"Failed to send notification to chat {chat_id} for user {user.id}. Error: {e}")
 
 
-    await query.edit_message_text(text="...")
+
 
     logo_image_path = f"images/{chosen_logo}.png"
     try:

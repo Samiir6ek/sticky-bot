@@ -44,21 +44,25 @@ def setup_database():
                 tribe TEXT,
                 chosen_logo TEXT,
                 real_name TEXT,
-                registration_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+                registration_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                bonus_claimed INTEGER DEFAULT 0
             )
         """)
         conn.commit()
 
         # --- Migration: Add real_name column if it doesn't exist (for existing databases) ---
-        # Explanation for Samir:
-        # This block is for safety. If we ever update the bot and add new columns,
-        # this code will safely add them to an existing database without deleting any data.
         cursor.execute("PRAGMA table_info(users)")
         columns = [info[1] for info in cursor.fetchall()]
         if 'real_name' not in columns:
             cursor.execute("ALTER TABLE users ADD COLUMN real_name TEXT")
             conn.commit()
             logger.info("Added 'real_name' column to existing 'users' table.")
+
+        # --- Migration: Add bonus_claimed column if it doesn't exist ---
+        if 'bonus_claimed' not in columns:
+            cursor.execute("ALTER TABLE users ADD COLUMN bonus_claimed INTEGER DEFAULT 0")
+            conn.commit()
+            logger.info("Added 'bonus_claimed' column to existing 'users' table.")
         # --- End of Migration ---
 
         logger.info("Database setup complete. 'users' table is ready.")
@@ -157,6 +161,29 @@ def get_user_details(user_id: int) -> dict:
     except sqlite3.Error as e:
         logger.error(f"Error getting details for user {user_id}: {e}")
         return {}
+    finally:
+        if conn:
+            conn.close()
+
+def set_bonus_claimed(user_id: int):
+    """
+    Sets the bonus_claimed flag to 1 for a given user.
+    """
+    conn = db_connect()
+    if conn is None:
+        return
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE users
+            SET bonus_claimed = 1
+            WHERE user_id = ?
+        """, (user_id,))
+        conn.commit()
+        logger.info(f"User {user_id} has claimed their bonus sticker.")
+    except sqlite3.Error as e:
+        logger.error(f"Error setting bonus_claimed for user {user_id}: {e}")
     finally:
         if conn:
             conn.close()
