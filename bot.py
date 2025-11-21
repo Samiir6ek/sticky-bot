@@ -557,30 +557,10 @@ async def fallback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     return ConversationHandler.END
 
 
-from threading import Thread
-from flask import Flask
-
-# --- Webserver Setup for Render ---
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return "Bot is running!"
-
-def run_web_server():
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port)
-
-
-# --- Main Application Setup ---
 def main() -> None:
     """
-    This is the main function that runs the bot.
+    This is the main function that runs the bot using webhooks.
     """
-    web_thread = Thread(target=run_web_server)
-    web_thread.daemon = True
-    web_thread.start()
-
     logger.info("Setting up database...")
     db.setup_database()
 
@@ -662,7 +642,21 @@ def main() -> None:
     application.add_handler(CommandHandler("reset_user", reset_user_command))
     application.add_handler(conv_handler)
 
-    application.run_polling()
+    # --- Webhook Configuration for Render ---
+    WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
+    PORT = int(os.environ.get("PORT", "8080"))
+
+    if WEBHOOK_URL:
+        logger.info(f"Using webhook. Setting webhook to {WEBHOOK_URL}")
+        application.run_webhook(
+            listen="0.0.0.0",
+            port=PORT,
+            url_path="", # Empty url_path means updates are sent to the root URL
+            webhook_url=WEBHOOK_URL,
+        )
+    else:
+        logger.warning("WEBHOOK_URL environment variable not set. Falling back to polling (not recommended for Render).")
+        application.run_polling()
 
 
 if __name__ == "__main__":
