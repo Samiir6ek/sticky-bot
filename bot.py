@@ -66,8 +66,9 @@ logger = logging.getLogger(__name__)
     GET_REAL_NAME,
     CHOOSE_LOGO_STAGE,
     CHOOSE_LOGO_TRIBE,
+    CONFIRM_STORY_POST,
     AWAIT_STORY_PROOF,
-) = range(7)
+) = range(8)
 
 # Explicitly define states to avoid ValueError
 SELECT_LANG = 0
@@ -76,7 +77,8 @@ GET_NICKNAME = 2
 GET_REAL_NAME = 3
 CHOOSE_LOGO_STAGE = 4
 CHOOSE_LOGO_TRIBE = 5
-AWAIT_STORY_PROOF = 6
+CONFIRM_STORY_POST = 6
+AWAIT_STORY_PROOF = 7
 
 
 # --- Helper Functions ---
@@ -436,10 +438,29 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         )
 
     logger.info(f"User {user.id} offered login sticker for story.")
-    return AWAIT_STORY_PROOF # Transition directly to AWAIT_STORY_PROOF
+    return CONFIRM_STORY_POST # Transition to new state
 
 
 
+
+
+async def handle_agree_to_post(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """
+    Handles the user agreeing to post the story for the bonus sticker.
+    Sends instructions and transitions to AWAIT_STORY_PROOF.
+    """
+    query = update.callback_query
+    await query.answer()
+    lang = context.user_data.get("lang", "en")
+
+    logger.info(f"User {update.effective_user.id} agreed to post story.")
+
+    # Send instructions for sharing the story and asking for photo proof
+    await query.message.reply_text(
+        text=get_text('bonus_instructions', lang), # Assuming 'bonus_instructions' is the correct key for this text
+        parse_mode='Markdown'
+    )
+    return AWAIT_STORY_PROOF
 
 
 async def await_story_proof(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -533,6 +554,9 @@ def main() -> None:
             ],
             CHOOSE_LOGO_TRIBE: [
                 CallbackQueryHandler(choose_logo_tribe, pattern="^logo_tribe_"),
+            ],
+            CONFIRM_STORY_POST: [
+                CallbackQueryHandler(handle_agree_to_post, pattern="^agree_to_post$"),
             ],
             AWAIT_STORY_PROOF: [
                 MessageHandler(filters.PHOTO, await_story_proof),
