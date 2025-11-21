@@ -54,10 +54,9 @@ TEXT = {
         'contact_me_button': "💬 Contact Samir",
         'get_bonus_button': "✨ Get Bonus Sticker",
         'fallback_message': "Sorry, I didn't understand that. Please use the buttons or follow the instructions.",
-        'agree_to_post_button': "✅ Okay, I'll post it!",
-        'final_order_confirmation': "Thank you for sharing! We've received your story proof. Your special nickname/login sticker has been added to your order! 🎉\n\n" \
-                                    "If you have any questions or want to order more customized stickers, feel free to contact me!",
-        'admin_story_proof_caption': "✅ **Nickname/Login Sticker Story Proof**\n\nUser: @{username}\nNickname/Login: {nickname}\nName: {real_name}\n\nPlease verify their story."
+        'posted_story_button': "✅ I have posted it!",
+        'final_order_confirmation': "Great! Our team will check your story. If you have really posted it, your nickname/login sticker will be given to you! 🎉\n\nIf you have any questions or want to order more customized stickers, feel free to contact me!",
+        'admin_story_notification': "✅ **User claims to have posted story!**\n\nUser: @{username}\nNickname/Login: {nickname}\nName: {real_name}\n\nPlease verify their story."
     },
     'uz': {
         'welcome': "👋 Salom! Men **sticky_online_store**'ning rasmiy botiman.\n\n" \
@@ -99,15 +98,10 @@ TEXT = {
                          "Bu hech kimda yo'q, noyob stiker!\n\n" \
                          "Bepul nikneym/login stikerini olish uchun, @sticky\\_online\\_store kanalimizdagi [USHBU POSTNI](YOUR_POST_URL_HERE) 24 soat davomida Telegram (yoki Instagram) hikoyangizda ulashing.\n\n" \
                          "Hikoyani joylashtirishga rozi ekanligingizni tasdiqlash uchun 'Okay' tugmasini bosing.",
-        'contact_me_button': "💬 Samir bilan bog'lanish",
-        'get_bonus_button': "✨ Bonus stikerini olish",
         'fallback_message': "Kechirasiz, men buni tushunmadim. Iltimos, tugmalardan foydalaning yoki ko'rsatmalarga amal qiling.",
-        'bonus_instructions': "Ajoyib! Qo'shimcha BEPUL stiker olish uchun, @sticky\\_online\\_store kanalimizdagi [USHBU POSTNI](YOUR_POST_URL_HERE) 24 soat davomida Telegram (yoki Instagram) hikoyangizda ulashing. U nashr qilingandan so'ng, **hikoyangiz rasmini yuklab oling** va menga dalil sifatida yuboring!",
-        'bonus_yes_button': "✅ Ha, bonusni xohlayman!",
-        'bonus_no_button': "❌ Yo'q, rahmat.",
-        'bonus_no_thanks': "Yaxshi, muammo yo'q! Agar fikringiz o'zgarsa, /start buyrug'i bilan qaytadan boshlashingiz mumkin.",
-        'bonus_confirmation': "Ulashingiz uchun rahmat! Hikoyangiz tasdig'ini oldik. Maxsus bonus stikeringiz buyurtmangizga qo'shildi! 🎉",
-        'admin_bonus_caption': "✅ **Bonus stiker tasdig'i**\n\nFoydalanuvchi: @{username}\nNikneym/Login: {nickname}\nIsm: {real_name}\n\nIltimos, hikoyasini tekshiring."
+        'posted_story_button': "✅ Men joylashtirdim!",
+        'final_order_confirmation': "Ajoyib! Bizning jamoamiz hikoyangizni tekshiradi. Agar siz uni haqiqatan ham joylashtirgan bo'lsangiz, nikneym/login stikeringiz sizga beriladi! 🎉\n\nAgar savollaringiz bo'lsa yoki ko'proq maxsus stikerlar buyurtma qilmoqchi bo'lsangiz, men bilan bog'laning!",
+        'admin_story_notification': "✅ **Foydalanuvchi hikoyani joylashtirganini da'vo qilmoqda!**\n\nFoydalanuvchi: @{username}\nNikneym/Login: {nickname}\nIsm: {real_name}\n\nIltimos, hikoyasini tekshiring."
     },
     'ru': {
         'welcome': "👋 Привет! Я официальный бот **sticky_online_store**.\n\n" \
@@ -150,10 +144,9 @@ TEXT = {
                          "Чтобы получить **БЕСПЛАТНЫЙ** стикер с никнеймом/логином, поделитесь [ЭТИМ ПОСТОМ](YOUR_POST_URL_HERE) из нашего канала @sticky\\_online\\_store в своей истории Telegram (или Instagram) на 24 часа.\n\n" \
                          "Нажмите «ОК», чтобы подтвердить согласие на публикацию истории и отправить подтверждение.",
         'fallback_message': "Извините, я не понял. Пожалуйста, используйте кнопки или следуйте инструкциям.",
-        'agree_to_post_button': "✅ Ок, опубликую!",
-        'final_order_confirmation': "Спасибо за то, что поделились! Мы получили подтверждение вашей истории. Ваш специальный стикер с никнеймом/логином добавлен к вашему заказу! 🎉\n\n" \
-                                    "Если у вас есть вопросы или вы хотите заказать больше индивидуальных стикеров, свяжитесь со мной!",
-        'admin_story_proof_caption': "✅ **Подтверждение истории стикера с никнеймом/логином**\n\nПользователь: @{username}\nНикнейм/Логин: {nickname}\nИмя: {real_name}\n\nПожалуйста, проверьте его историю."
+        'posted_story_button': "✅ Я опубликовал!",
+        'final_order_confirmation': "Отлично! Наша команда проверит вашу историю. Если вы действительно опубликовали ее, ваш стикер с никнеймом/логином будет вам выдан! 🎉\n\nЕсли у вас есть вопросы или вы хотите заказать больше индивидуальных стикеров, свяжитесь со мной!",
+        'admin_story_notification': "✅ **Пользователь утверждает, что опубликовал историю!**\n\nПользователь: @{username}\nНикнейм/Логин: {nickname}\nИмя: {real_name}\n\nПожалуйста, проверьте его историю."
     }
 }
 

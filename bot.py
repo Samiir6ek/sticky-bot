@@ -415,7 +415,7 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 
     ad_keyboard = [
         [
-            InlineKeyboardButton(get_text('agree_to_post_button', lang), callback_data="agree_to_post"),
+            InlineKeyboardButton(get_text('posted_story_button', lang), callback_data="posted_story"),
         ]
     ]
     ad_markup = InlineKeyboardMarkup(ad_keyboard)
@@ -444,74 +444,52 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 
 
 
-async def handle_agree_to_post(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def handle_posted_story_claim(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """
-    Handles the user agreeing to post the story for the bonus sticker.
-    Sends instructions and transitions to AWAIT_STORY_PROOF.
+    Handles the user claiming to have posted the story.
+    Notifies admin group, sends confirmation to user, and ends conversation.
     """
     query = update.callback_query
     await query.answer()
-    lang = context.user_data.get("lang", "en")
-
-    logger.info(f"User {update.effective_user.id} agreed to post story.")
-
-    # Send instructions for sharing the story and asking for photo proof
-    await query.message.reply_text(
-        text=get_text('bonus_instructions', lang), # Assuming 'bonus_instructions' is the correct key for this text
-        parse_mode='Markdown'
-    )
-    return AWAIT_STORY_PROOF
-
-
-async def await_story_proof(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """
-    Handles the photo sent by the user as proof for the bonus sticker.
-    """
     user = update.effective_user
     lang = context.user_data.get("lang", "en")
 
-    if not update.message.photo:
-        await update.message.reply_text(get_text('bonus_instructions', lang), parse_mode='Markdown') # Ask again for photo
-        return AWAIT_STORY_PROOF
+    logger.info(f"User {user.id} claims to have posted story.")
 
-    # Get the largest photo
-    photo_file = await update.message.photo[-1].get_file()
     user_details = db.get_user_details(user.id)
 
-    caption = get_text('admin_story_proof_caption', 'en').format(
+    # Send notification to admin group
+    admin_notification = get_text('admin_story_notification', 'en').format(
         username=user_details.get('telegram_username', 'N/A'),
         nickname=user_details.get('nickname', 'N/A'),
         real_name=user_details.get('real_name', 'N/A')
     )
-
-    # Forward photo to admin group
     try:
-        await context.bot.send_photo(
+        await context.bot.send_message(
             chat_id=GROUP_CHAT_ID,
-            photo=photo_file.file_id,
-            caption=caption,
+            text=admin_notification,
             parse_mode='Markdown'
         )
-        logger.info(f"Forwarded story proof from user {user.id} to group {GROUP_CHAT_ID}.")
+        logger.info(f"Sent story claim notification to group {GROUP_CHAT_ID} for user {user.id}")
     except Exception as e:
-        logger.error(f"Failed to forward story proof from user {user.id} to group {GROUP_CHAT_ID}. Error: {e}")
-        # Inform admin if forwarding fails
-        await context.bot.send_message(chat_id=ADMIN_ID, text=f"Failed to forward story proof from user {user.id}. Error: {e}")
+        logger.error(f"Failed to send story claim notification to group {GROUP_CHAT_ID} for user {user.id}. Error: {e}")
+        await context.bot.send_message(chat_id=ADMIN_ID, text=f"Failed to send story claim notification for user {user.id}. Error: {e}")
 
-    # Update database
-    db.set_bonus_claimed(user.id)
-
+    # Send confirmation to user with Contact Samir button
     contact_keyboard = [
         [InlineKeyboardButton(get_text('contact_me_button', lang), url="https://t.me/JUST_Samir")]
     ]
     contact_markup = InlineKeyboardMarkup(contact_keyboard)
 
-    await update.message.reply_text(
+    await query.message.reply_text(
         text=get_text('final_order_confirmation', lang),
         reply_markup=contact_markup,
         parse_mode='Markdown'
     )
     return ConversationHandler.END
+
+
+
 
 
 async def fallback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -556,11 +534,7 @@ def main() -> None:
                 CallbackQueryHandler(choose_logo_tribe, pattern="^logo_tribe_"),
             ],
             CONFIRM_STORY_POST: [
-                CallbackQueryHandler(handle_agree_to_post, pattern="^agree_to_post$"),
-            ],
-            AWAIT_STORY_PROOF: [
-                MessageHandler(filters.PHOTO, await_story_proof),
-                MessageHandler(filters.TEXT & ~filters.COMMAND, await_story_proof),
+                CallbackQueryHandler(handle_posted_story_claim, pattern="^posted_story$"),
             ],
         },
         fallbacks=[
