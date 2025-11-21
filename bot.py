@@ -66,9 +66,17 @@ logger = logging.getLogger(__name__)
     GET_REAL_NAME,
     CHOOSE_LOGO_STAGE,
     CHOOSE_LOGO_TRIBE,
-    AWAIT_BONUS_CHOICE,
     AWAIT_STORY_PROOF,
-) = range(7) # Decreased range by 2 (removed CONFIRM_BONUS_OFFER and AWAIT_BONUS_CHOICE)
+) = range(7)
+
+# Explicitly define states to avoid ValueError
+SELECT_LANG = 0
+CHECK_SUB = 1
+GET_NICKNAME = 2
+GET_REAL_NAME = 3
+CHOOSE_LOGO_STAGE = 4
+CHOOSE_LOGO_TRIBE = 5
+AWAIT_STORY_PROOF = 6
 
 
 # --- Helper Functions ---
