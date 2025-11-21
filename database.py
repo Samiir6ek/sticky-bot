@@ -79,12 +79,15 @@ def user_exists(user_id: int) -> bool:
     """
     conn = db_connect()
     if conn is None:
+        logger.error(f"Failed to connect to DB for user_exists check for user {user_id}.")
         return False
 
     try:
         cursor = conn.cursor()
         cursor.execute("SELECT 1 FROM users WHERE user_id = ?", (user_id,))
-        return cursor.fetchone() is not None
+        found = cursor.fetchone() is not None
+        logger.info(f"User {user_id} exists check: {found}")
+        return found
     except sqlite3.Error as e:
         logger.error(f"Error checking if user {user_id} exists: {e}")
         return False
