@@ -7,6 +7,7 @@ import logging
 import os
 import httpx
 import time
+import asyncio
 from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 
@@ -412,6 +413,9 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
             text=get_text('order_complete', lang).format(chosen_logo=chosen_logo),
             parse_mode='Markdown'
         )
+
+    # --- Add a delay before sending the advertisement ---
+    await asyncio.sleep(30)
 
     ad_keyboard = [
         [
