@@ -458,22 +458,27 @@ async def handle_posted_story_claim(update: Update, context: ContextTypes.DEFAUL
 
     user_details = db.get_user_details(user.id)
 
-    # Send notification to admin group
     admin_notification = get_text('admin_story_notification', 'en').format(
         username=user_details.get('telegram_username', 'N/A'),
         nickname=user_details.get('nickname', 'N/A'),
         real_name=user_details.get('real_name', 'N/A')
     )
-    try:
-        await context.bot.send_message(
-            chat_id=GROUP_CHAT_ID,
-            text=admin_notification,
-            parse_mode='Markdown'
-        )
-        logger.info(f"Sent story claim notification to group {GROUP_CHAT_ID} for user {user.id}")
-    except Exception as e:
-        logger.error(f"Failed to send story claim notification to group {GROUP_CHAT_ID} for user {user.id}. Error: {e}")
-        await context.bot.send_message(chat_id=ADMIN_ID, text=f"Failed to send story claim notification for user {user.id}. Error: {e}")
+
+    # Send notification to admin and the group
+    notification_chat_ids = [ADMIN_ID, GROUP_CHAT_ID]
+    for chat_id in notification_chat_ids:
+        try:
+            await context.bot.send_message(
+                chat_id=chat_id,
+                text=admin_notification,
+                parse_mode=ParseMode.HTML
+            )
+            logger.info(f"Sent story claim notification to chat {chat_id} for user {user.id}")
+        except Exception as e:
+            logger.error(f"Failed to send story claim notification to chat {chat_id} for user {user.id}. Error: {e}")
+            # Send a fallback to the primary admin if a notification fails
+            if chat_id != ADMIN_ID:
+                 await context.bot.send_message(chat_id=ADMIN_ID, text=f"Failed to send story claim notification to group {chat_id} for user {user.id}. Error: {e}")
 
     # Send confirmation to user with Contact Samir button
     contact_keyboard = [

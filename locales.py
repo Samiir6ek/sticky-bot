@@ -56,7 +56,7 @@ TEXT = {
         'fallback_message': "Sorry, I didn't understand that. Please use the buttons or follow the instructions.",
         'posted_story_button': "✅ I have posted it!",
         'final_order_confirmation': "Great! Our team will check your story. If you have really posted it, your nickname/login sticker will be given to you! 🎉\n\nIf you have any questions or want to order more customized stickers, feel free to contact me!",
-        'admin_story_notification': "✅ **User claims to have posted story!**\n\nUser: @{username}\nNickname/Login: {nickname}\nName: {real_name}\n\nPlease verify their story."
+        'admin_story_notification': "✅ <b>User claims to have posted story!</b>\n\nUser: @{username}\nNickname/Login: {nickname}\nName: {real_name}\n\nPlease verify their story."
     },
     'uz': {
         'welcome': "👋 Salom! Men **sticky_online_store**'ning rasmiy botiman.\n\n" \
@@ -101,7 +101,7 @@ TEXT = {
         'fallback_message': "Kechirasiz, men buni tushunmadim. Iltimos, tugmalardan foydalaning yoki ko'rsatmalarga amal qiling.",
         'posted_story_button': "✅ Men joylashtirdim!",
         'final_order_confirmation': "Ajoyib! Bizning jamoamiz hikoyangizni tekshiradi. Agar siz uni haqiqatan ham joylashtirgan bo'lsangiz, nikneym/login stikeringiz sizga beriladi! 🎉\n\nAgar savollaringiz bo'lsa yoki ko'proq maxsus stikerlar buyurtma qilmoqchi bo'lsangiz, men bilan bog'laning!",
-        'admin_story_notification': "✅ **Foydalanuvchi hikoyani joylashtirganini da'vo qilmoqda!**\n\nFoydalanuvchi: @{username}\nNikneym/Login: {nickname}\nIsm: {real_name}\n\nIltimos, hikoyasini tekshiring."
+        'admin_story_notification': "✅ <b>Foydalanuvchi hikoyani joylashtirganini da'vo qilmoqda!</b>\n\nFoydalanuvchi: @{username}\nNikneym/Login: {nickname}\nIsm: {real_name}\n\nIltimos, hikoyasini tekshiring."
     },
     'ru': {
         'welcome': "👋 Привет! Я официальный бот **sticky_online_store**.\n\n" \
@@ -146,7 +146,7 @@ TEXT = {
         'fallback_message': "Извините, я не понял. Пожалуйста, используйте кнопки или следуйте инструкциям.",
         'posted_story_button': "✅ Я опубликовал!",
         'final_order_confirmation': "Отлично! Наша команда проверит вашу историю. Если вы действительно опубликовали ее, ваш стикер с никнеймом/логином будет вам выдан! 🎉\n\nЕсли у вас есть вопросы или вы хотите заказать больше индивидуальных стикеров, свяжитесь со мной!",
-        'admin_story_notification': "✅ **Пользователь утверждает, что опубликовал историю!**\n\nПользователь: @{username}\nНикнейм/Логин: {nickname}\nИмя: {real_name}\n\nПожалуйста, проверьте его историю."
+        'admin_story_notification': "✅ <b>Пользователь утверждает, что опубликовал историю!</b>\n\nПользователь: @{username}\nНикнейм/Логин: {nickname}\nИмя: {real_name}\n\nПожалуйста, проверьте его историю."
     }
 }
 
