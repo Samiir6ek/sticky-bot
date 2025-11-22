@@ -49,7 +49,7 @@ TEXT = {
                               "**Chosen Logo:** `{chosen_logo}`",
         'advertisement': "🔥 **Want a sticker with YOUR nickname/login on it?** 🔥\n\n" \
                          "It's the ultimate custom sticker that no one else has!\n\n" \
-                         "To get your **FREE** **nickname/login sticker**, share [THIS POST](YOUR_POST_URL_HERE) from our @sticky\\_online\\_store channel to your Telegram (or Instagram) story for 24 hours.\n\n" \
+                         "To get your <b>FREE nickname/login sticker</b>, share [THIS POST](YOUR_POST_URL_HERE) from our @sticky\\_online\\_store channel to your Telegram (or Instagram) story for 24 hours.\n\n" \
                          "Press 'Okay' to confirm you agree to post the story and proceed to send proof.",
         'contact_me_button': "💬 Contact Samir",
         'get_bonus_button': "✨ Get Bonus Sticker",
