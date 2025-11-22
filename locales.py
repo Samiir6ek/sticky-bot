@@ -49,7 +49,7 @@ TEXT = {
                               "**Chosen Logo:** `{chosen_logo}`",
         'advertisement': "🔥 **Want a sticker with YOUR nickname/login on it?** 🔥\n\n" \
                          "It's the ultimate custom sticker that no one else has!\n\n" \
-                         "To get your **FREE** nickname/login sticker, share [THIS POST](YOUR_POST_URL_HERE) from our @sticky\\_online\\_store channel to your Telegram (or Instagram) story for 24 hours.\n\n" \
+                         "To get your **FREE** **nickname/login sticker**, share [THIS POST](YOUR_POST_URL_HERE) from our @sticky\\_online\\_store channel to your Telegram (or Instagram) story for 24 hours.\n\n" \
                          "Press 'Okay' to confirm you agree to post the story and proceed to send proof.",
         'contact_me_button': "💬 Contact Samir",
         'get_bonus_button': "✨ Get Bonus Sticker",
@@ -84,7 +84,7 @@ TEXT = {
                         "Buyurtma 26-noyabrdan boshlab volonterlar xonasida bo'ladi va uni xohlagan vaqtda olib ketishingiz mumkin!\n\n" \
                         "Ishtirokingiz uchun rahmat!",
         'admin_notification': "🔔 **Yangi stiker buyurtmasi**\n\n" \
-                              "**Foydalanuvchi ID'si:** `{user_id}`\n" \
+                              "**Foydalanuvchi ID'si:**  `{user_id}`\n" \
                               "**Username:** @{username}\n" \
                               "**Til:** `{lang}`\n\n" \
                               "--- Ro'yxatdan o'tish ---\n" \
@@ -96,12 +96,12 @@ TEXT = {
                               "**Tanlangan logo:** `{chosen_logo}`",
         'advertisement': "🔥 **O'Z nikneymingiz tushirilgan stiker xohlaysizmi?** 🔥\n\n" \
                          "Bu hech kimda yo'q, noyob stiker!\n\n" \
-                         "Bepul nikneym/login stikerini olish uchun, @sticky\\_online\\_store kanalimizdagi [USHBU POSTNI](YOUR_POST_URL_HERE) 24 soat davomida Telegram (yoki Instagram) hikoyangizda ulashing.\n\n" \
+                         "Bepul **nikneym/login** stikerini olish uchun, @sticky\\_online\\_store kanalimizdagi [USHBU POSTNI](YOUR_POST_URL_HERE) 24 soat davomida Telegram (yoki Instagram) hikoyangizda ulashing.\n\n" \
                          "Hikoyani joylashtirishga rozi ekanligingizni tasdiqlash uchun 'Okay' tugmasini bosing.",
         'fallback_message': "Kechirasiz, men buni tushunmadim. Iltimos, tugmalardan foydalaning yoki ko'rsatmalarga amal qiling.",
         'posted_story_button': "✅ Men joylashtirdim!",
         'final_order_confirmation': "Ajoyib! Bizning jamoamiz hikoyangizni tekshiradi. Agar siz uni haqiqatan ham joylashtirgan bo'lsangiz, nikneym/login stikeringiz sizga beriladi! 🎉\n\nAgar savollaringiz bo'lsa yoki ko'proq maxsus stikerlar buyurtma qilmoqchi bo'lsangiz, men bilan bog'laning!",
-        'admin_story_notification': "✅ <b>Foydalanuvchi hikoyani joylashtirganini da'vo qilmoqda!</b>\n\nFoydalanuvchi: @{username}\nNikneym/Login: {nickname}\nIsm: {real_name}\n\nIltimos, hikoyasini tekshiring."
+        'admin_story_notification': "✅ <b>Foydalanuvchi hikoyani joylashtirganini da'vo qilmoqda!</b>\n\nFoydalanuvchi: @{username}\nNikneym/Login:   <b>{nickname}</b>\nIsm: {real_name}\n\nIltimos, hikoyasini tekshiring."
     },
     'ru': {
         'welcome': "👋 Привет! Я официальный бот **sticky_online_store**.\n\n" \
@@ -141,7 +141,7 @@ TEXT = {
                               "**Выбранный логотип:** `{chosen_logo}`",
         'advertisement': "🔥 **Хотите стикер с ВАШИМ никнеймом/логином?** 🔥\n\n" \
                          "Это уникальный кастомный стикер, которого нет больше ни у кого!\n\n" \
-                         "Чтобы получить **БЕСПЛАТНЫЙ** стикер с никнеймом/логином, поделитесь [ЭТИМ ПОСТОМ](YOUR_POST_URL_HERE) из нашего канала @sticky\\_online\\_store в своей истории Telegram (или Instagram) на 24 часа.\n\n" \
+                         "Чтобы получить **БЕСПЛАТНЫЙ** стикер с **никнеймом/логином**, поделитесь [ЭТИМ ПОСТОМ](YOUR_POST_URL_HERE) из нашего канала @sticky\\_online\\_store в своей истории Telegram (или Instagram) на 24 часа.\n\n" \
                          "Нажмите «ОК», чтобы подтвердить согласие на публикацию истории и отправить подтверждение.",
         'fallback_message': "Извините, я не понял. Пожалуйста, используйте кнопки или следуйте инструкциям.",
         'posted_story_button': "✅ Я опубликовал!",

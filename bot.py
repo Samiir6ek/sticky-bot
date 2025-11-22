@@ -415,7 +415,7 @@ async def choose_logo_tribe(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         )
 
     # --- Add a delay before sending the advertisement ---
-    await asyncio.sleep(30)
+    await asyncio.sleep(10)
 
     ad_keyboard = [
         [
