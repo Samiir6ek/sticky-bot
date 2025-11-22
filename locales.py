@@ -23,7 +23,7 @@ TEXT = {
         'already_registered': "You have already registered for a free sticker! Your order is being prepared.",
         'ask_nickname': "✅ Subscription confirmed!\n\nLet's get you registered. What is your **nickname/login** at school 21?:",
         'invalid_nickname': "⚠️ **Invalid Nickname**\n\nWe couldn't find the nickname `{nickname}` in the school's database. Please check for typos and try again.",
-        'ask_real_name': "✅ Nickname `{nickname}` verified!\n\nNow, please enter your **name** (e.g., John):\n\n(⚠️ This will be used to verify your identity when you pick up the sticker!)",
+        'ask_real_name': "✅ Nickname `{nickname}` verified!\n\nNow, please enter your **name** (e.g., Samir):\n\n(⚠️ This will be used to verify your identity when you pick up the sticker!)",
         'ask_stage': "Got it, `{nickname}`! Now, please select your **stage**.",
         'intensive_button': "🚀 Intensive",
         'core_button': "🌱 Core",
@@ -49,7 +49,7 @@ TEXT = {
                               "**Chosen Logo:** `{chosen_logo}`",
         'advertisement': "🔥 **Want a sticker with YOUR nickname/login on it?** 🔥\n\n" \
                          "It's the ultimate custom sticker that no one else has!\n\n" \
-                         "To get your **FREE nickname/login sticker**, share [THIS POST](YOUR_POST_URL_HERE) from our @sticky\\_online\\_store channel to your Telegram (or Instagram) story for 24 hours.\n\n" \
+                         "To get your **FREE nickname/login sticker**, share\n\n THIS POST: t.me/sticky_online_store/204 \nfrom our @sticky\\_online\\_store channel to your Telegram story for 24 hours.\n\n" \
                          "Press 'Okay' to confirm you agree to post the story and proceed to send proof.",
         'contact_me_button': "💬 Contact Samir",
         'get_bonus_button': "✨ Get Bonus Sticker",
@@ -96,7 +96,7 @@ TEXT = {
                               "**Tanlangan logo:** `{chosen_logo}`",
         'advertisement': "🔥 **O'Z nikneymingiz tushirilgan stiker xohlaysizmi?** 🔥\n\n" \
                          "Bu hech kimda yo'q, noyob stiker!\n\n" \
-                         "Bepul **nikneym/login** stikerini olish uchun, @sticky\\_online\\_store kanalimizdagi [USHBU POSTNI](YOUR_POST_URL_HERE) 24 soat davomida Telegram (yoki Instagram) hikoyangizda ulashing.\n\n" \
+                         "Bepul **nikneym/login** stikerini olish uchun, @sticky\\_online\\_store kanalimizdagi \n\nUSHBU POSTNI: t.me/sticky_online_store/205 \n24 soat davomida Telegram hikoyangizda ulashing.\n\n" \
                          "Hikoyani joylashtirishga rozi ekanligingizni tasdiqlash uchun 'Okay' tugmasini bosing.",
         'fallback_message': "Kechirasiz, men buni tushunmadim. Iltimos, tugmalardan foydalaning yoki ko'rsatmalarga amal qiling.",
         'posted_story_button': "✅ Men joylashtirdim!",
@@ -116,7 +116,7 @@ TEXT = {
         'already_registered': "Вы уже зарегистрировались на получение бесплатного стикера! Ваш заказ готовится.",
         'ask_nickname': "✅ Подписка подтверждена!\n\nДавайте вас зарегистрируем. Какой у вас **никнейм/логин** в школе 21?:",
         'invalid_nickname': "⚠️ **Неверный Никнейм**\n\nНикнейм `{nickname}` не найден в базе данных школы. Пожалуйста, проверьте правильность написания и попробуйте снова.",
-        'ask_real_name': "✅ Никнейм `{nickname}` подтвержден!\n\nТеперь, пожалуйста, введите ваше **имя** (например, Иван):\n\n(⚠️ Это имя будет использоваться для подтверждения вашей личности при получении стикера!)",
+        'ask_real_name': "✅ Никнейм `{nickname}` подтвержден!\n\nТеперь, пожалуйста, введите ваше **имя** (например, Акмаль):\n\n(⚠️ Это имя будет использоваться для подтверждения вашей личности при получении стикера!)",
         'ask_stage': "Понял, `{nickname}`! Теперь, пожалуйста, выберите ваш **этап**.",
         'intensive_button': "🚀 Интенсив",
         'core_button': "🌱 Основа",
@@ -141,7 +141,7 @@ TEXT = {
                               "**Выбранный логотип:** `{chosen_logo}`",
         'advertisement': "🔥 **Хотите стикер с ВАШИМ никнеймом/логином?** 🔥\n\n" \
                          "Это уникальный кастомный стикер, которого нет больше ни у кого!\n\n" \
-                         "Чтобы получить **БЕСПЛАТНЫЙ** стикер с **никнеймом/логином**, поделитесь [ЭТИМ ПОСТОМ](YOUR_POST_URL_HERE) из нашего канала @sticky\\_online\\_store в своей истории Telegram (или Instagram) на 24 часа.\n\n" \
+                         "Чтобы получить **БЕСПЛАТНЫЙ** стикер с **никнеймом/логином**, поделитесь \n\nЭТИМ ПОСТОМ: t.me/sticky_online_store/206 \nиз нашего канала @sticky\\_online\\_store в своей истории Telegram (или Instagram) на 24 часа.\n\n" \
                          "Нажмите «ОК», чтобы подтвердить согласие на публикацию истории и отправить подтверждение.",
         'fallback_message': "Извините, я не понял. Пожалуйста, используйте кнопки или следуйте инструкциям.",
         'posted_story_button': "✅ Я опубликовал!",
