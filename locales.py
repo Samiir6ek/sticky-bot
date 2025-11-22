@@ -49,7 +49,7 @@ TEXT = {
                               "**Chosen Logo:** `{chosen_logo}`",
         'advertisement': "🔥 **Want a sticker with YOUR nickname/login on it?** 🔥\n\n" \
                          "It's the ultimate custom sticker that no one else has!\n\n" \
-                         "To get your **FREE nickname/login sticker**, share\n\n THIS POST: t.me/sticky_online_store/204 \nfrom our @sticky\\_online\\_store channel to your Telegram story for 24 hours.\n\n" \
+                         "To get your **FREE nickname/login sticker**, share\n\n THIS POST: t.me/sticky\\_online\\_store/204 \nfrom our @sticky\\_online\\_store channel to your Telegram story for 24 hours.\n\n" \
                          "Press 'Okay' to confirm you agree to post the story and proceed to send proof.",
         'contact_me_button': "💬 Contact Samir",
         'get_bonus_button': "✨ Get Bonus Sticker",
@@ -96,12 +96,13 @@ TEXT = {
                               "**Tanlangan logo:** `{chosen_logo}`",
         'advertisement': "🔥 **O'Z nikneymingiz tushirilgan stiker xohlaysizmi?** 🔥\n\n" \
                          "Bu hech kimda yo'q, noyob stiker!\n\n" \
-                         "Bepul **nikneym/login** stikerini olish uchun, @sticky\\_online\\_store kanalimizdagi \n\nUSHBU POSTNI: t.me/sticky_online_store/205 \n24 soat davomida Telegram hikoyangizda ulashing.\n\n" \
+                         "Bepul **nikneym/login** stikerini olish uchun, @sticky\\_online\\_store kanalimizdagi \n\nUSHBU POSTNI: t.me/sticky\\_online\\_store/205 \n24 soat davomida Telegram hikoyangizda ulashing.\n\n" \
                          "Hikoyani joylashtirishga rozi ekanligingizni tasdiqlash uchun 'Okay' tugmasini bosing.",
         'fallback_message': "Kechirasiz, men buni tushunmadim. Iltimos, tugmalardan foydalaning yoki ko'rsatmalarga amal qiling.",
         'posted_story_button': "✅ Men joylashtirdim!",
         'final_order_confirmation': "Ajoyib! Bizning jamoamiz hikoyangizni tekshiradi. Agar siz uni haqiqatan ham joylashtirgan bo'lsangiz, nikneym/login stikeringiz sizga beriladi! 🎉\n\nAgar savollaringiz bo'lsa yoki ko'proq maxsus stikerlar buyurtma qilmoqchi bo'lsangiz, men bilan bog'laning!",
-        'admin_story_notification': "✅ <b>Foydalanuvchi hikoyani joylashtirganini da'vo qilmoqda!</b>\n\nFoydalanuvchi: @{username}\nNikneym/Login:   <b>{nickname}</b>\nIsm: {real_name}\n\nIltimos, hikoyasini tekshiring."
+        'admin_story_notification': "✅ <b>Foydalanuvchi hikoyani joylashtirganini da'vo qilmoqda!</b>\n\nFoydalanuvchi: @{username}\nNikneym/Login:   <b>{nickname}</b>\nIsm: {real_name}\n\nIltimos, hikoyasini tekshiring.",
+        'contact_me_button': "💬 Contact Samir"
     },
     'ru': {
         'welcome': "👋 Привет! Я официальный бот **sticky_online_store**.\n\n" \
@@ -141,12 +142,13 @@ TEXT = {
                               "**Выбранный логотип:** `{chosen_logo}`",
         'advertisement': "🔥 **Хотите стикер с ВАШИМ никнеймом/логином?** 🔥\n\n" \
                          "Это уникальный кастомный стикер, которого нет больше ни у кого!\n\n" \
-                         "Чтобы получить **БЕСПЛАТНЫЙ** стикер с **никнеймом/логином**, поделитесь \n\nЭТИМ ПОСТОМ: t.me/sticky_online_store/206 \nиз нашего канала @sticky\\_online\\_store в своей истории Telegram (или Instagram) на 24 часа.\n\n" \
+                         "Чтобы получить **БЕСПЛАТНЫЙ** стикер с **никнеймом/логином**, поделитесь \n\nЭТИМ ПОСТОМ: t.me/sticky\\_online\\_store/206 \nиз нашего канала @sticky\\_online\\_store в своей истории Telegram (или Instagram) на 24 часа.\n\n" \
                          "Нажмите «ОК», чтобы подтвердить согласие на публикацию истории и отправить подтверждение.",
         'fallback_message': "Извините, я не понял. Пожалуйста, используйте кнопки или следуйте инструкциям.",
         'posted_story_button': "✅ Я опубликовал!",
         'final_order_confirmation': "Отлично! Наша команда проверит вашу историю. Если вы действительно опубликовали ее, ваш стикер с никнеймом/логином будет вам выдан! 🎉\n\nЕсли у вас есть вопросы или вы хотите заказать больше индивидуальных стикеров, свяжитесь со мной!",
-        'admin_story_notification': "✅ <b>Пользователь утверждает, что опубликовал историю!</b>\n\nПользователь: @{username}\nНикнейм/Логин: {nickname}\nИмя: {real_name}\n\nПожалуйста, проверьте его историю."
+        'admin_story_notification': "✅ <b>Пользователь утверждает, что опубликовал историю!</b>\n\nПользователь: @{username}\nНикнейм/Логин: {nickname}\nИмя: {real_name}\n\nПожалуйста, проверьте его историю.",
+        'contact_me_button': "💬 Contact Samir"
     }
 }
 
