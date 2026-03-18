@@ -106,3 +106,7 @@ To solve this, I have added a special, admin-only command:
 - **Who can use it:** Only you (the `ADMIN_ID` set in the code). The bot will ignore this command if sent by anyone else.
 
 After you use `/reset`, the bot will forget that you have registered, and you can use `/start` to go through the entire process again from the beginning.
+
+
+
+it is a small project of mine, a small business and the bot helped me to increase my sales a lot!
